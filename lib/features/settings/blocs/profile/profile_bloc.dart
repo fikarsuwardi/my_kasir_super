@@ -17,7 +17,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(state.copyWith(
           status: Status.apply,
           user: service,
-          image: service.image,
+          image: service?.image,
         ));
       } catch (e) {
         emit(state.copyWith(status: Status.failure, error: e.toString()));
