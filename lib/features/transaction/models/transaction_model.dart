@@ -81,6 +81,22 @@ class TransactionModel extends Equatable {
     );
   }
 
+  TransactionModel copyQr({String? qrIdX, String? qrStringX, TypeEnum? typeX}) {
+    return TransactionModel(
+      discount: discount,
+      id: id,
+      items: items,
+      payAmount: payAmount,
+      qrId: qrIdX ?? qrId,
+      qrString: qrStringX ?? qrString,
+      referenceId: referenceId,
+      type: typeX ?? type,
+      amount: amount,
+      createdAt: createdAt,
+      paymentType: paymentType,
+    );
+  }
+
   @override
   List<Object> get props => [
         id,

@@ -1,9 +1,10 @@
 part of '../page.dart';
 
 class _ConfirmSection extends StatelessWidget {
-  const _ConfirmSection({required this.nominal});
+  const _ConfirmSection({required this.nominal, this.referenceId});
 
   final num nominal;
+  final String? referenceId;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,8 @@ class _ConfirmSection extends StatelessWidget {
                               TypeEnum.paid,
                               payAmount: nominal,
                             ),
+                            type: TypeEnum.paid,
+                            referenceId: referenceId,
                           ),
                         );
                   },

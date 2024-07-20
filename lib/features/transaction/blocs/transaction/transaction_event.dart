@@ -7,6 +7,27 @@ sealed class TransactionEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class CreateQrTransactionEvent extends TransactionEvent {
+  final TransactionModel transaction;
+  final String? referenceId;
+
+  const CreateQrTransactionEvent(this.transaction, {this.referenceId});
+
+  @override
+  List<Object?> get props => [transaction, referenceId];
+}
+
+class CekQrTransactionEvent extends TransactionEvent {}
+
+class GetDetailTransactionEvent extends TransactionEvent {
+  final String referenceId;
+
+  const GetDetailTransactionEvent(this.referenceId);
+
+  @override
+  List<Object?> get props => [referenceId];
+}
+
 class GetTransactionEvent extends TransactionEvent {
   final TypeEnum? type;
 
@@ -19,9 +40,10 @@ class GetTransactionEvent extends TransactionEvent {
 class CreateTransactionEvent extends TransactionEvent {
   final TransactionModel transaction;
   final TypeEnum? type;
+  final String? referenceId;
 
-  const CreateTransactionEvent(this.transaction, {this.type});
+  const CreateTransactionEvent(this.transaction, {this.type, this.referenceId});
 
   @override
-  List<Object?> get props => [transaction, type];
+  List<Object?> get props => [transaction, type, referenceId];
 }

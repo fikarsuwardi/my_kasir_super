@@ -12,6 +12,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartState.initial()) {
     on<InitialCartEvent>((event, emit) {
       emit(CartState.initial());
+
+      if (event.transaction != null) {
+        final items = event.transaction!.items
+            .map((e) => CartModel(product: e.toCart, qty: e.qty))
+            .toList();
+
+        emit(state.copyWith(carts: items));
+      }
     });
 
     on<ApplyDiscountCartEvent>((event, emit) {

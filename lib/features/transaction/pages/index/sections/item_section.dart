@@ -8,7 +8,13 @@ class _ItemSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          TransactionDetailPage.routeName,
+          arguments: transaction.referenceId,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.all(Dimens.dp16),
         child: Column(

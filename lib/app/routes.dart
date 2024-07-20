@@ -45,17 +45,31 @@ Route<dynamic> routes(RouteSettings settings) {
       });
     case PaymentPage.routeName:
       return CupertinoPageRoute(builder: (_) {
-        return const PaymentPage();
+        return PaymentPage(
+          referenceId: settings.arguments as String?,
+        );
       });
     case CashPage.routeName:
       return CupertinoPageRoute(builder: (_) {
-        return const CashPage();
+        return CashPage(
+          referenceId: settings.arguments as String?,
+        );
       });
     case SuccessTransactionPage.routeName:
       return CupertinoPageRoute(builder: (_) {
         return SuccessTransactionPage(
           referenceId: settings.arguments as String,
         );
+      });
+    case TransactionDetailPage.routeName:
+      return CupertinoPageRoute(builder: (_) {
+        return TransactionDetailPage(
+          referenceId: settings.arguments as String,
+        );
+      });
+    case POSQrPage.routeName:
+      return CupertinoPageRoute(builder: (_) {
+        return const POSQrPage();
       });
     default:
       return MaterialPageRoute(builder: (_) {

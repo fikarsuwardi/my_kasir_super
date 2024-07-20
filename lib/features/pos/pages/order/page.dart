@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasirsuper/core/core.dart';
-import 'package:kasirsuper/features/home/home.dart';
 import 'package:kasirsuper/features/pos/pos.dart';
 import 'package:kasirsuper/features/transaction/transaction.dart';
 
@@ -28,11 +27,7 @@ class POSOrderPage extends StatelessWidget {
         BlocListener<TransactionBloc, TransactionState>(
           listener: (context, state) {
             if (state.status == Status.apply) {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                MainPage.routeName,
-                (route) => false,
-              );
+              Navigator.pop(context);
             }
           },
         )

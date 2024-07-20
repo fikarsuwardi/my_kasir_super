@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasirsuper/core/core.dart';
 import 'package:kasirsuper/features/home/home.dart';
+import 'package:kasirsuper/features/settings/settings.dart';
 import 'package:kasirsuper/features/transaction/transaction.dart';
+import 'package:screenshot/screenshot.dart';
 
 part 'sections/action_section.dart';
 part 'sections/heading_section.dart';

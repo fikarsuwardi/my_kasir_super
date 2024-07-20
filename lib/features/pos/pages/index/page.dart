@@ -25,7 +25,7 @@ class _POSPageState extends State<POSPage> {
 
     getData();
 
-    context.read<CartBloc>().add(InitialCartEvent());
+    context.read<CartBloc>().add(const InitialCartEvent());
     super.initState();
   }
 

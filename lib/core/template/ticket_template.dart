@@ -1,9 +1,15 @@
 import 'package:flutter_esc_pos_utils/flutter_esc_pos_utils.dart';
+import 'package:kasirsuper/core/core.dart';
+import 'package:kasirsuper/features/settings/settings.dart';
+import 'package:kasirsuper/features/transaction/transaction.dart';
 
 class TicketTemplate {
   TicketTemplate._();
 
-  static Future<List<int>> ticket() async {
+  static Future<List<int>> ticket({TransactionModel? transaction}) async {
+    final user = await ProfileService.get();
+    final printer = await StruckService.get();
+
     List<int> bytes = [];
 
     final profile = await CapabilityProfile.load();
@@ -12,7 +18,7 @@ class TicketTemplate {
     bytes += generator.reset();
 
     bytes += generator.text(
-      'Kasir SUPER Group',
+      user?.name ?? 'Kasir SUPER Group',
       styles: const PosStyles(
         bold: true,
         align: PosAlign.center,
@@ -20,27 +26,47 @@ class TicketTemplate {
       ),
     );
     bytes += generator.text(
-      'Instagram : @kasirsuper.id',
+      printer?.desc ?? 'Instagram : @kasirsuper.id',
       styles: const PosStyles(align: PosAlign.center),
     );
 
     bytes += generator.hr();
 
-    bytes += generator.row(posColumn('Tipe Pembayaran', 'Tunai'));
-    bytes += generator.row(posColumn('Order ID', 'TRX-100-10102030405'));
+    bytes += generator.row(posColumn(
+      'Tipe Pembayaran',
+      transaction?.paymentType.valueName ?? 'Tunai',
+    ));
+    bytes += generator.row(posColumn(
+      'Order ID',
+      transaction?.referenceId ?? 'TRX-100-10102030405',
+    ));
 
     bytes += generator.hr();
 
     bytes += title(generator, 'Pesanan');
     bytes += generator.hr();
 
-    bytes += title(generator, 'Organic Potato');
-    bytes += generator.row(posColumn('Rp 18.900', '2x'));
-    bytes += title(generator, 'Organic Beans');
-    bytes += generator.row(posColumn('Rp 7.000', '1x'));
+    if (transaction != null) {
+      for (var element in transaction.items) {
+        bytes += title(generator, element.title);
+        bytes += generator.row(posColumn(
+          element.price.toIDR(),
+          '${element.qty}x',
+        ));
+      }
+    } else {
+      bytes += title(generator, 'Organic Potato');
+      bytes += generator.row(posColumn('Rp 18.900', '2x'));
+      bytes += title(generator, 'Organic Beans');
+      bytes += generator.row(posColumn('Rp 7.000', '1x'));
+    }
 
     bytes += generator.hr();
-    bytes += generator.row(posColumn('Subtotal', 'Rp 44.800', isBold: true));
+    bytes += generator.row(posColumn(
+      'Subtotal',
+      transaction?.amount.toIDR() ?? 'Rp 44.800',
+      isBold: true,
+    ));
 
     bytes += generator.hr();
 
@@ -48,26 +74,57 @@ class TicketTemplate {
     bytes += generator.hr();
     bytes += generator.row(posColumn('Jumlah pesanan', '3'));
     bytes += generator.row(
-      posColumn('Subtotal', 'Rp 49.000'),
+      posColumn(
+        'Subtotal',
+        transaction?.amount.toIDR() ?? 'Rp 44.800',
+      ),
     );
-    bytes += generator.row(posColumn('Pajak', 'Rp 0'));
-    bytes += generator.row(posColumn('Diskon', '- Rp 4.200'));
+    bytes += generator.row(posColumn('Pajak', 0.toIDR()));
+    bytes += generator.row(posColumn(
+      'Diskon',
+      '- ${transaction?.discount.toIDR() ?? 0.toIDR()}',
+    ));
     bytes += generator.hr();
+    if (transaction != null) {
+      bytes += generator.row(
+        posColumn(
+          'Total Tagihan',
+          (transaction.amount - transaction.discount).toIDR(),
+          isBold: true,
+        ),
+      );
+    } else {
+      bytes += generator.row(
+        posColumn('Total Tagihan', 'Rp 44.800', isBold: true),
+      );
+    }
     bytes += generator.row(
-      posColumn('Total Tagihan', 'Rp 44.800', isBold: true),
-    );
-    bytes += generator.row(
-      posColumn('Total Pembayaran', 'Rp 50.000', isBold: true),
+      posColumn(
+        'Total Pembayaran',
+        transaction?.payAmount.toIDR() ?? 'Rp. 50.000',
+        isBold: true,
+      ),
     );
     bytes += generator.hr();
-    bytes += generator.row(
-      posColumn('Total Kembali', 'Rp 5.200', isBold: true),
-    );
+    if (transaction != null) {
+      bytes += generator.row(
+        posColumn(
+            'Total Kembali',
+            (transaction.payAmount -
+                    (transaction.amount - transaction.discount))
+                .toIDR(),
+            isBold: true),
+      );
+    } else {
+      bytes += generator.row(
+        posColumn('Total Kembali', 'Rp 5.200', isBold: true),
+      );
+    }
 
     bytes += generator.emptyLines(1);
 
     bytes += generator.text(
-      'Terimakasih sudah berkunjung.',
+      printer?.message ?? 'Terimakasih sudah berkunjung.',
       styles: const PosStyles(align: PosAlign.center),
     );
     bytes += generator.text(

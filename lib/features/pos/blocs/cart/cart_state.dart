@@ -55,14 +55,18 @@ class CartState extends Equatable {
     }
   }
 
-  TransactionModel transaction(TypeEnum type, {num? payAmount}) {
+  TransactionModel transaction(
+    TypeEnum type, {
+    num? payAmount,
+    PaymentType? paymentType,
+  }) {
     final now = DateTime.now();
     return TransactionModel(
       referenceId: 'TRX-${now.year}${now.month}${now.day}${now.millisecond}',
       type: type,
       amount: getEstimate,
       createdAt: now,
-      paymentType: PaymentType.cash,
+      paymentType: paymentType ?? PaymentType.cash,
       items: carts.map((e) => e.toTransaction).toList(),
       discount: discount,
       payAmount: payAmount ?? getEstimate - discount,

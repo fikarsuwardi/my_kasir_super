@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:kasirsuper/features/product/product.dart';
 
 part 'transaction_item_model.g.dart';
 
@@ -71,6 +72,21 @@ class TransactionItemModel extends Equatable {
       unit: unit,
       sku: sku,
       transactionId: id,
+    );
+  }
+
+  ProductModel get toCart {
+    return ProductModel(
+      title: title,
+      desc: desc,
+      image: image,
+      regularPrice: regularPrice,
+      price: price,
+      stock: stock,
+      unit: unit,
+      sku: sku,
+      id: id,
+      createdAt: DateTime.now(),
     );
   }
 

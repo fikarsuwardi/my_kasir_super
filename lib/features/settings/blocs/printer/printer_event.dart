@@ -18,4 +18,13 @@ class TestPrinterEvent extends PrinterEvent {
   List<Object> get props => [macAdress];
 }
 
+class TransactionPrinterEvent extends PrinterEvent {
+  final TransactionModel transaction;
+
+  const TransactionPrinterEvent(this.transaction);
+
+  @override
+  List<Object> get props => [transaction];
+}
+
 class OpenSettingPrinterEvent extends PrinterEvent {}
