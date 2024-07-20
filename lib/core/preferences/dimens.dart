@@ -27,4 +27,5 @@ class Dimens {
   static const dp32 = 32.0;
   static const dp38 = 38.0;
   static const dp48 = 48.0;
+  static const dp50 = 50.0;
 }

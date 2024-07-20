@@ -17,6 +17,7 @@ class RegularTextInput extends StatelessWidget {
     this.required = false,
     this.onChanged,
     this.suffix,
+    this.keyboardType,
   });
 
   final String hintText;
@@ -31,6 +32,7 @@ class RegularTextInput extends StatelessWidget {
   final bool required;
   final ValueChanged<String>? onChanged;
   final Widget? suffix;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,7 @@ class RegularTextInput extends StatelessWidget {
           minLines: minLines,
           maxLength: maxLength,
           onChanged: onChanged,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
             hintText: hintText,
