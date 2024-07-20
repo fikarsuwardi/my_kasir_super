@@ -45,8 +45,7 @@ class ProductModel extends Equatable {
   @JsonKey(defaultValue: '')
   final String sku;
 
-  @JsonKey(defaultValue: '')
-  final String createdAt;
+  final DateTime createdAt;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

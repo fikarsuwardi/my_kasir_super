@@ -1,7 +1,9 @@
 part of '../page.dart';
 
 class _ItemSection extends StatelessWidget {
-  const _ItemSection();
+  const _ItemSection(this.transaction);
+
+  final TransactionModel transaction;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class _ItemSection extends StatelessWidget {
                     border: Border.all(color: context.theme.primaryColor),
                   ),
                   child: RegularText.semiBold(
-                    'Done',
+                    transaction.type.valueName,
                     style: TextStyle(
                       fontSize: Dimens.dp10,
                       color: context.theme.primaryColor,
@@ -33,7 +35,7 @@ class _ItemSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: RegularText.semiBold(
-                    '24 Jan 2021 • 11:02',
+                    transaction.createdAt.transaction,
                     style: const TextStyle(fontSize: Dimens.dp10),
                     textAlign: TextAlign.end,
                   ),
@@ -42,11 +44,11 @@ class _ItemSection extends StatelessWidget {
             ),
             Dimens.dp16.height,
             RegularText.semiBold(
-              'Tunai • TRX-100-10102030405',
+              '${transaction.paymentType.valueName} • ${transaction.referenceId}',
             ),
             Dimens.dp8.height,
             RegularText.semiBold(
-              'Rp 125.000',
+              (transaction.amount - transaction.discount).toIDR(),
               style: TextStyle(color: context.theme.primaryColor),
             ),
           ],

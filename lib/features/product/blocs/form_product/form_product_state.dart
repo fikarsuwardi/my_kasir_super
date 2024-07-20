@@ -29,7 +29,7 @@ class FormProductState extends Equatable {
   final int? stock;
   final String? sku;
 
-  ProductModel product({int? id, String? createdAt}) {
+  ProductModel product({int? id, DateTime? createdAt}) {
     return ProductModel(
       id: id ?? 0,
       title: name ?? '',
@@ -40,7 +40,7 @@ class FormProductState extends Equatable {
       stock: stock ?? 0,
       unit: unit ?? '',
       sku: sku ?? '',
-      createdAt: createdAt ?? DateTime.now().toIso8601String(),
+      createdAt: createdAt ?? DateTime.now(),
     );
   }
 

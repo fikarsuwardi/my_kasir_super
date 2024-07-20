@@ -173,6 +173,7 @@ class LightTheme {
       textTheme: textTheme,
       appBarTheme: appBarTheme,
       cardTheme: cardTheme,
+      disabledColor: disabledColor,
       bottomNavigationBarTheme: bottomNavigationBarTheme,
       elevatedButtonTheme: elevatedButtonTheme,
       outlinedButtonTheme: outlinedButtonTheme,

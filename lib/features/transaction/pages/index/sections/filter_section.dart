@@ -8,50 +8,63 @@ class _FilterSection extends StatefulWidget {
 }
 
 class _FilterSectionState extends State<_FilterSection> {
-  String selected = 'Done';
+  TypeEnum? selected;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  void getData() {
+    context.read<TransactionBloc>().add(GetTransactionEvent(selected));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        buildContainer(context, label: 'Done'),
-        Dimens.dp12.width,
-        buildContainer(context, label: 'Draft'),
-      ],
+      children: [buildContainer(context)] +
+          TypeEnum.values
+              .map((e) => buildContainer(context, label: e))
+              .toList(),
     );
   }
 
   Widget buildContainer(
     BuildContext context, {
-    required String label,
+    TypeEnum? label,
   }) {
     final isActive = selected == label;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selected = label;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Dimens.dp16,
-          vertical: Dimens.dp8,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimens.dp8),
-          color: isActive ? context.theme.primaryColor : null,
-          border: Border.all(
-            color:
-                isActive ? context.theme.primaryColor : AppColors.black[200]!,
+    return Padding(
+      padding: const EdgeInsets.only(right: Dimens.dp16),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            selected = label;
+          });
+          getData();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimens.dp16,
+            vertical: Dimens.dp8,
           ),
-        ),
-        child: RegularText.semiBold(
-          label,
-          style: TextStyle(
-            fontSize: Dimens.dp12,
-            color: isActive
-                ? context.theme.scaffoldBackgroundColor
-                : AppColors.black[200],
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimens.dp8),
+            color: isActive ? context.theme.primaryColor : null,
+            border: Border.all(
+              color:
+                  isActive ? context.theme.primaryColor : AppColors.black[200]!,
+            ),
+          ),
+          child: RegularText.semiBold(
+            label?.valueName ?? 'All',
+            style: TextStyle(
+              fontSize: Dimens.dp12,
+              color: isActive
+                  ? context.theme.scaffoldBackgroundColor
+                  : AppColors.black[200],
+            ),
           ),
         ),
       ),
