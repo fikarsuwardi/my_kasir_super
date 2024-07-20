@@ -13,6 +13,7 @@ class Dimens {
 
   static const dp2 = 2.0;
   static const dp4 = 4.0;
+  static const dp6 = 6.0;
   static const dp8 = 8.0;
   static const dp10 = 10.0;
   static const dp12 = 12.0;
@@ -24,4 +25,6 @@ class Dimens {
   static const dp24 = 24.0;
   static const dp26 = 26.0;
   static const dp32 = 32.0;
+  static const dp38 = 38.0;
+  static const dp48 = 48.0;
 }

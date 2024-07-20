@@ -31,7 +31,7 @@ class AppColors {
     800: Color(0xffCF1726),
   });
 
-  static const black = MaterialColor(0xff333333, {
+  static const black = MaterialColor(0xff2A2A2A, {
     200: Color(0xff999999),
     400: Color(0xff808080),
     500: Color(0xff666666),
