@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasirsuper/core/core.dart';
 import 'package:kasirsuper/features/home/home.dart';
+import 'package:kasirsuper/features/product/product.dart';
 import 'package:kasirsuper/features/settings/settings.dart';
 
 import 'routes.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => StruckBloc()..add(GetStruckEvent()),
         ),
+        BlocProvider(create: (context) => PrinterBloc()),
+        BlocProvider(create: (context) => ProductBloc()),
+        BlocProvider(create: (context) => FormProductBloc()),
       ],
       child: MaterialApp(
         title: 'Kasir SUPER',

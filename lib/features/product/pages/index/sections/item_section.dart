@@ -1,7 +1,15 @@
 part of '../page.dart';
 
 class _ItemSection extends StatelessWidget {
-  const _ItemSection();
+  const _ItemSection({
+    required this.product,
+    required this.onDelete,
+    required this.onEdit,
+  });
+
+  final ProductModel product;
+  final Function() onEdit;
+  final Function() onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -12,28 +20,35 @@ class _ItemSection extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.dp8),
-              child: Image.network(
-                'https://indonesiakaya.com/wp-content/uploads/2020/10/langsat1200.jpg',
-                width: 74,
-                height: 74,
-                fit: BoxFit.cover,
-              ),
+              child: product.image.isEmpty
+                  ? Image.network(
+                      'https://indonesiakaya.com/wp-content/uploads/2020/10/langsat1200.jpg',
+                      width: 74,
+                      height: 74,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.memory(
+                      ImageHelper.convertToUint8List(product.image),
+                      width: 74,
+                      height: 74,
+                      fit: BoxFit.cover,
+                    ),
             ),
             Dimens.dp12.width,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RegularText.semiBold('Organic Potato Original'),
+                  RegularText.semiBold(product.title),
                   Dimens.dp4.height,
                   RichText(
                     text: TextSpan(
-                      text: 'Rp 18.900',
+                      text: product.regularPrice.toIDR(),
                       style: context.theme.textTheme.titleMedium,
-                      children: const [
+                      children: [
                         TextSpan(
-                          text: ' / kg',
-                          style: TextStyle(fontWeight: FontWeight.normal),
+                          text: ' / ${product.unit}',
+                          style: const TextStyle(fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
@@ -48,14 +63,14 @@ class _ItemSection extends StatelessWidget {
           children: [
             Expanded(
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: onEdit,
                 child: const Text('Edit'),
               ),
             ),
             Dimens.dp16.width,
             Expanded(
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: onDelete,
                 child: const Text('Delete'),
               ),
             ),

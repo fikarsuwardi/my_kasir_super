@@ -1,14 +1,14 @@
 part of '../page.dart';
 
 class _FloationgSection extends StatelessWidget {
-  const _FloationgSection();
+  const _FloationgSection({required this.onTap});
+
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, ProductInputPage.routeName);
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimens.dp16,

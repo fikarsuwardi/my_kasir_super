@@ -9,14 +9,22 @@ class _HeadingSection extends StatelessWidget {
       padding: const EdgeInsets.all(Dimens.dp16),
       child: Column(
         children: [
-          const SubtitleText(
-            'KasirSUPER',
-            align: TextAlign.center,
+          BlocBuilder<ProfileBloc, ProfileState>(
+            builder: (context, state) {
+              return SubtitleText(
+                state.user?.name ?? 'KasirSUPER',
+                align: TextAlign.center,
+              );
+            },
           ),
           Dimens.dp14.height,
-          const RegularText(
-            'Instagram : @superpos.id',
-            textAlign: TextAlign.center,
+          BlocBuilder<StruckBloc, StruckState>(
+            builder: (context, state) {
+              return RegularText(
+                state.struck?.desc ?? 'Instagram : @superpos.id',
+                textAlign: TextAlign.center,
+              );
+            },
           ),
         ],
       ),

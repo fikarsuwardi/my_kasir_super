@@ -5,7 +5,7 @@ import 'package:kasirsuper/features/product/product.dart';
 import 'package:kasirsuper/features/settings/pages/pages.dart';
 import 'package:kasirsuper/features/settings/settings.dart';
 
-Route<dynamic> routes(settings) {
+Route<dynamic> routes(RouteSettings settings) {
   switch (settings.name) {
     case MainPage.routeName:
       return MaterialPageRoute(builder: (_) {
@@ -13,7 +13,9 @@ Route<dynamic> routes(settings) {
       });
     case ProductInputPage.routeName:
       return CupertinoPageRoute(builder: (_) {
-        return const ProductInputPage();
+        return ProductInputPage(
+          product: settings.arguments as ProductModel?,
+        );
       });
     case ProfilePage.routeName:
       return CupertinoPageRoute(builder: (_) {
@@ -30,6 +32,10 @@ Route<dynamic> routes(settings) {
     case ShowStruckPage.routeName:
       return CupertinoPageRoute(builder: (_) {
         return const ShowStruckPage();
+      });
+    case PrinterPage.routeName:
+      return CupertinoPageRoute(builder: (_) {
+        return const PrinterPage();
       });
     default:
       return MaterialPageRoute(builder: (_) {

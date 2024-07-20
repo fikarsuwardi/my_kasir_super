@@ -78,7 +78,7 @@ class _StruckPageState extends State<StruckPage> {
                 onPressed: () {
                   Navigator.pushNamed(context, ShowStruckPage.routeName);
                 },
-                child: const Text('Lihat Tampilan Struck'),
+                child: const Text('Lihat Tampilan Struk'),
               ),
               Dimens.dp16.height,
               ElevatedButton(

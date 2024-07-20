@@ -15,7 +15,9 @@ class _DeviceSection extends StatelessWidget {
         ItemMenuSetting(
           title: 'Printer',
           icon: Icons.print_outlined,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, PrinterPage.routeName);
+          },
         ),
         const Divider(height: 0),
         ItemMenuSetting(
