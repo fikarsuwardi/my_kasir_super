@@ -1,16 +1,21 @@
-# kasirsuper
+# kasir_super
 
-A new Flutter project.
+Tech Stack :
+- Bloc for state management, dependency injection, and route management
+- shared_preferences for persistent local key/value storage
+- Dio for http requests
 
-## Getting Started
+## Beranda
+![beranda](/assets/ss/beranda.png "beranda")
 
-This project is a starting point for a Flutter application.
+## Transaksi
+![transaksi](/assets/ss/transaksi.png "transaksi")
 
-A few resources to get you started if this is your first Flutter project:
+## Pos
+![pos](/assets/ss/pos.png "pos")
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Produk
+![product](/assets/ss/produk.png "product")
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Lainnya
+![lainnya](/assets/ss/lainnya.png "lainnya")
